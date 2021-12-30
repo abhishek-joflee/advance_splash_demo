@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.advance_splash_demo">
    <application
-        android:label="advance_splash_demo"
+        android:label="AdvanceSplash"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
