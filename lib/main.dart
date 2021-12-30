@@ -1,5 +1,8 @@
+import 'package:advance_splash_demo/my_init.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'splash.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,13 +16,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+    return FutureBuilder(
+        future: MyInit.instance.initialize(),
+        builder: (context, AsyncSnapshot snapshot) {
+          // Show splash screen while waiting for app resources to load:
+          return snapshot.connectionState == ConnectionState.waiting
+              ? const MaterialApp(home: Splash())
+              : MaterialApp(
+                  title: 'Flutter Demo',
+                  theme: ThemeData(
+                    primarySwatch: Colors.blue,
+                  ),
+                  home: const MyHomePage(title: 'Flutter Demo Home Page'),
+                );
+        });
   }
 }
 
